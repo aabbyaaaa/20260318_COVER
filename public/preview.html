@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Image Scaling Options</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .a4-container {
+            width: 210mm;
+            height: 297mm;
+            background: white;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        .top-section {
+            position: relative;
+            height: 65%;
+            width: 100%;
+        }
+        .bottom-section {
+            position: relative;
+            height: 35%;
+            width: 100%;
+            background: white;
+            padding: 3rem 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .company-logo {
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 1.5rem 2rem;
+            background-color: #e11d48;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-8 flex flex-col items-center gap-12 font-sans">
+
+    <div class="text-center max-w-2xl mb-8">
+        <h1 class="text-3xl font-bold mb-4">產品照片縮小 0.9 倍 (90%) 比較</h1>
+        <p class="text-gray-600">以下示範三種不同的縮小方式，請參考並選擇您最喜歡的效果。</p>
+    </div>
+
+    <!-- Option A -->
+    <div class="flex flex-col items-center gap-4">
+        <h2 class="text-2xl font-bold text-gray-800">選項 A：照片置中，周圍留白 (Scale)</h2>
+        <p class="text-gray-600 text-center max-w-md">使用 CSS <code>transform: scale(0.9)</code>。照片會等比例縮小 90%，四周會露出底色 (此處示範淺灰色底)。<br>適合：照片本身有背景，且您希望照片像一張卡片一樣貼在封面上。</p>
+        
+        <div class="a4-container">
+            <div class="top-section bg-gray-200 flex items-center justify-center">
+                <!-- Option A Implementation -->
+                <img 
+                    src="https://images.unsplash.com/photo-1581093458791-9f3c3900df4b?auto=format&fit=crop&q=80&w=800&h=1000" 
+                    alt="Product Option A" 
+                    class="w-full h-full object-cover transform scale-90 shadow-lg"
+                />
+                
+                <div class="company-logo">
+                    <h1 class="text-3xl font-bold tracking-tight leading-none">ThermoFisher</h1>
+                    <span class="text-sm tracking-[0.3em] mt-1 opacity-90">SCIENTIFIC</span>
+                </div>
+            </div>
+            <div class="bottom-section">
+                <div>
+                    <h2 class="text-5xl font-bold mb-3 leading-tight tracking-tight text-rose-600">高階智能分析儀器</h2>
+                    <h3 class="text-3xl text-gray-700 mb-10 font-medium">Advanced Smart Analyzer Pro</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Option B -->
+    <div class="flex flex-col items-center gap-4 mt-16">
+        <h2 class="text-2xl font-bold text-gray-800">選項 B：去背圖 + 主題底色 (Padding)</h2>
+        <p class="text-gray-600 text-center max-w-md">假設照片是「去背圖 (PNG)」。我們將 65% 區塊填滿主題色 (或淺色)，並使用 <code>padding</code> 讓產品內縮 10%。<br>適合：您有乾淨的去背產品圖，希望產品浮在背景色上。</p>
+        
+        <div class="a4-container">
+            <!-- Option B Implementation -->
+            <div class="top-section bg-rose-50 p-12 flex items-center justify-center">
+                <!-- Using a transparent PNG for demonstration -->
+                <img 
+                    src="https://images.unsplash.com/photo-1581093458791-9f3c3900df4b?auto=format&fit=crop&q=80&w=800&h=1000" 
+                    alt="Product Option B" 
+                    class="w-full h-full object-cover rounded-xl shadow-2xl"
+                    style="mix-blend-mode: multiply;" 
+                />
+                
+                <div class="company-logo">
+                    <h1 class="text-3xl font-bold tracking-tight leading-none">ThermoFisher</h1>
+                    <span class="text-sm tracking-[0.3em] mt-1 opacity-90">SCIENTIFIC</span>
+                </div>
+            </div>
+            <div class="bottom-section">
+                <div>
+                    <h2 class="text-5xl font-bold mb-3 leading-tight tracking-tight text-rose-600">高階智能分析儀器</h2>
+                    <h3 class="text-3xl text-gray-700 mb-10 font-medium">Advanced Smart Analyzer Pro</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Option C -->
+    <div class="flex flex-col items-center gap-4 mt-16 mb-16">
+        <h2 class="text-2xl font-bold text-gray-800">選項 C：完整顯示不裁切 (Object-Contain)</h2>
+        <p class="text-gray-600 text-center max-w-md">使用 <code>object-contain</code> 搭配 10% 的 <code>padding</code>。照片不會被裁切，會完整縮放並顯示在區塊內。<br>適合：產品照片本身帶有白色背景，且您不希望照片的任何邊緣被切掉。</p>
+        
+        <div class="a4-container">
+            <div class="top-section bg-white p-[5%]">
+                <!-- Option C Implementation -->
+                <img 
+                    src="https://images.unsplash.com/photo-1581093458791-9f3c3900df4b?auto=format&fit=crop&q=80&w=800&h=1000" 
+                    alt="Product Option C" 
+                    class="w-full h-full object-contain"
+                />
+                
+                <div class="company-logo">
+                    <h1 class="text-3xl font-bold tracking-tight leading-none">ThermoFisher</h1>
+                    <span class="text-sm tracking-[0.3em] mt-1 opacity-90">SCIENTIFIC</span>
+                </div>
+            </div>
+            <div class="bottom-section border-t border-gray-100">
+                <div>
+                    <h2 class="text-5xl font-bold mb-3 leading-tight tracking-tight text-rose-600">高階智能分析儀器</h2>
+                    <h3 class="text-3xl text-gray-700 mb-10 font-medium">Advanced Smart Analyzer Pro</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>多版型選擇 UI/UX Demo</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* 模擬 A4 比例 */
+    .a4-ratio {
+      aspect-ratio: 210 / 297;
+    }
+    
+    /* 列印時的處理：這是最核心的技術點 */
+    @media print {
+      /* 1. 隱藏所有不需要列印的 UI（側邊欄、背景、標題等） */
+      body * {
+        visibility: hidden;
+      }
+      /* 2. 只顯示被選中的模板及其子元素 */
+      .template-selected, .template-selected * {
+        visibility: visible;
+      }
+      /* 3. 將選中的模板強制放大並定位到紙張的左上角，取消所有圓角與陰影 */
+      .template-selected {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 210mm !important;
+        height: 297mm !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+        transform: none !important;
+        border-radius: 0 !important;
+      }
+      /* 隱藏不必要的元素 */
+      .no-print {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-100 flex h-screen overflow-hidden font-sans">
+
+  <!-- 左側表單 (模擬不變) -->
+  <div class="w-80 bg-white border-r border-gray-200 p-6 flex flex-col no-print z-10 shadow-lg">
+    <h1 class="text-xl font-bold mb-6">PDF 封面產生器</h1>
+    <div class="flex-1 space-y-4 text-sm text-gray-400">
+      <div class="h-10 bg-gray-50 rounded border border-gray-200 flex items-center px-3">公司 LOGO 上傳...</div>
+      <div class="h-10 bg-gray-50 rounded border border-gray-200 flex items-center px-3">產品名稱...</div>
+      <div class="h-10 bg-gray-50 rounded border border-gray-200 flex items-center px-3">主題顏色...</div>
+      <p class="mt-4 text-xs text-gray-500 leading-relaxed">
+        💡 <b>UI/UX 說明：</b><br>
+        左側欄位完全保持不變。<br>
+        用戶在這裡輸入的資料，會「同時」套用到右側所有的版型預覽中。
+      </p>
+    </div>
+    <button onclick="window.print()" class="w-full bg-gray-900 text-white py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors flex items-center justify-center gap-2">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+      匯出選中的 PDF
+    </button>
+  </div>
+
+  <!-- 右側預覽區 (多版型 Grid) -->
+  <div class="flex-1 p-8 overflow-y-auto no-print bg-gray-100">
+    <div class="mb-6 flex justify-between items-end max-w-6xl mx-auto">
+      <div>
+        <h2 class="text-2xl font-bold text-gray-800">選擇封面版型</h2>
+        <p class="text-gray-500 text-sm mt-1">請選擇一個您喜歡的排版，選中後點擊左下角匯出。</p>
+      </div>
+    </div>
+
+    <!-- 網格佈局：大螢幕一排3個，中螢幕一排2個 -->
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 pb-12 max-w-6xl mx-auto">
+      
+      <!-- 版型 1 (目前版型) -->
+      <div class="relative group cursor-pointer" onclick="selectTemplate(1)">
+        <div id="template-1" class="template-card a4-ratio bg-white shadow-md hover:shadow-xl rounded-xl overflow-hidden border-4 border-rose-500 transition-all relative">
+          <!-- 模擬版型內容 -->
+          <div class="absolute top-0 right-4 w-16 h-20 bg-rose-500 rounded-b-xl"></div>
+          <div class="mt-24 mx-6 h-40 bg-gray-100 rounded-lg flex items-center justify-center text-gray-400">產品圖</div>
+          <div class="mt-8 mx-6 h-4 w-24 bg-rose-500 rounded-full"></div>
+          <div class="mt-4 mx-6 h-8 w-3/4 bg-gray-800 rounded"></div>
+          <div class="mt-2 mx-6 h-4 w-1/2 bg-gray-400 rounded"></div>
+        </div>
+        <!-- 選中狀態的打勾圖示 -->
+        <div id="check-1" class="absolute -top-4 -right-4 bg-rose-500 text-white rounded-full p-2 shadow-lg scale-100 transition-transform">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        </div>
+        <div class="text-center mt-4 font-bold text-rose-600 text-lg" id="title-1">版型 A (經典右側 LOGO)</div>
+      </div>
+
+      <!-- 版型 2 (新版型構想) -->
+      <div class="relative group cursor-pointer" onclick="selectTemplate(2)">
+        <div id="template-2" class="template-card a4-ratio bg-white shadow-sm hover:shadow-xl rounded-xl overflow-hidden border-4 border-transparent hover:border-gray-300 transition-all relative">
+          <!-- 模擬版型內容：沉穩底座 -->
+          <div class="absolute bottom-0 left-0 right-0 h-1/3 bg-slate-800"></div>
+          <div class="mt-12 mx-6 h-8 w-3/4 bg-gray-800 rounded"></div>
+          <div class="mt-2 mx-6 h-4 w-1/2 bg-gray-400 rounded"></div>
+          <div class="mt-12 mx-6 h-56 bg-gray-100 rounded-lg flex items-center justify-center text-gray-400 relative z-10 shadow-lg border border-gray-200">產品圖</div>
+        </div>
+        <div id="check-2" class="absolute -top-4 -right-4 bg-rose-500 text-white rounded-full p-2 shadow-lg scale-0 transition-transform">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        </div>
+        <div class="text-center mt-4 font-medium text-gray-500 text-lg" id="title-2">版型 B (沉穩底座)</div>
+      </div>
+
+      <!-- 版型 3 (新版型構想) -->
+      <div class="relative group cursor-pointer" onclick="selectTemplate(3)">
+        <div id="template-3" class="template-card a4-ratio bg-white shadow-sm hover:shadow-xl rounded-xl overflow-hidden border-4 border-transparent hover:border-gray-300 transition-all relative">
+          <!-- 模擬版型內容：左側邊條 -->
+          <div class="absolute top-0 bottom-0 left-0 w-12 bg-rose-500"></div>
+          <div class="ml-20 mt-16 h-48 w-2/3 bg-gray-100 rounded-lg flex items-center justify-center text-gray-400">產品圖</div>
+          <div class="ml-20 mt-12 h-8 w-2/3 bg-gray-800 rounded"></div>
+          <div class="ml-20 mt-2 h-4 w-1/2 bg-gray-400 rounded"></div>
+        </div>
+        <div id="check-3" class="absolute -top-4 -right-4 bg-rose-500 text-white rounded-full p-2 shadow-lg scale-0 transition-transform">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        </div>
+        <div class="text-center mt-4 font-medium text-gray-500 text-lg" id="title-3">版型 C (專業側邊條)</div>
+      </div>
+
+      <!-- 版型 4 (新版型構想) -->
+      <div class="relative group cursor-pointer" onclick="selectTemplate(4)">
+        <div id="template-4" class="template-card a4-ratio bg-white shadow-sm hover:shadow-xl rounded-xl overflow-hidden border-4 border-transparent hover:border-gray-300 transition-all relative">
+          <!-- 模擬版型內容：極簡置中 -->
+          <div class="mt-16 mx-auto h-8 w-2/3 bg-gray-800 rounded"></div>
+          <div class="mt-3 mx-auto h-4 w-1/3 bg-gray-400 rounded"></div>
+          <div class="mt-12 mx-auto h-48 w-3/4 bg-gray-100 rounded-lg flex items-center justify-center text-gray-400">產品圖</div>
+          <div class="absolute bottom-12 left-1/2 transform -translate-x-1/2 h-2 w-24 bg-rose-500 rounded-full"></div>
+        </div>
+        <div id="check-4" class="absolute -top-4 -right-4 bg-rose-500 text-white rounded-full p-2 shadow-lg scale-0 transition-transform">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        </div>
+        <div class="text-center mt-4 font-medium text-gray-500 text-lg" id="title-4">版型 D (極簡置中)</div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    function selectTemplate(id) {
+      // 1. 重置所有卡片的樣式
+      document.querySelectorAll('.template-card').forEach(el => {
+        el.classList.remove('border-rose-500', 'template-selected');
+        el.classList.add('border-transparent');
+      });
+      // 2. 隱藏所有打勾圖示 (使用 scale-0 達成動畫效果)
+      document.querySelectorAll('[id^="check-"]').forEach(el => {
+        el.classList.remove('scale-100');
+        el.classList.add('scale-0');
+      });
+      // 3. 重置所有標題顏色
+      document.querySelectorAll('[id^="title-"]').forEach(el => {
+        el.classList.remove('text-rose-600', 'font-bold');
+        el.classList.add('text-gray-500', 'font-medium');
+      });
+
+      // 4. 設置當前選中的卡片樣式
+      const selectedCard = document.getElementById(`template-${id}`);
+      selectedCard.classList.remove('border-transparent');
+      selectedCard.classList.add('border-rose-500', 'template-selected');
+      
+      // 5. 顯示打勾圖示
+      document.getElementById(`check-${id}`).classList.remove('scale-0');
+      document.getElementById(`check-${id}`).classList.add('scale-100');
+      
+      // 6. 標題變色
+      const selectedTitle = document.getElementById(`title-${id}`);
+      selectedTitle.classList.remove('text-gray-500', 'font-medium');
+      selectedTitle.classList.add('text-rose-600', 'font-bold');
+    }
+
+    // 初始設定：預設選中版型 1
+    document.getElementById('template-1').classList.add('template-selected');
+  </script>
+</body>
+</html>

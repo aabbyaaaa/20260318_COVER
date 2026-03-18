@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>字體比較 Demo</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&family=Noto+Serif+TC:wght@400;700;900&family=Zen+Maru+Gothic:wght@400;700;900&family=Inter:wght@400;700&display=swap');
+
+    body {
+      background-color: #f3f4f6;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4rem;
+    }
+
+    .cover-container {
+      background-color: white;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      flex-shrink: 0;
+      width: 210mm;
+      height: 297mm;
+      padding: 40mm 20mm 20mm 20mm;
+    }
+
+    .font-sans-tc { font-family: 'Noto Sans TC', sans-serif; }
+    .font-serif-tc { font-family: 'Noto Serif TC', serif; }
+    .font-maru { font-family: 'Zen Maru Gothic', sans-serif; }
+    .font-en { font-family: 'Inter', sans-serif; }
+  </style>
+</head>
+<body>
+
+  <div class="text-center">
+    <h1 class="text-3xl font-bold mb-2">封面字體風格比較</h1>
+    <p class="text-gray-600">請往下捲動查看三種不同字體的呈現效果</p>
+  </div>
+
+  <!-- 1. 思源黑體 -->
+  <div>
+    <h2 class="text-2xl font-bold mb-4 text-gray-800">1. 現代科技風：思源黑體 (Noto Sans TC)</h2>
+    <div class="cover-container font-sans-tc">
+      <div class="absolute top-0 right-12 w-32 h-24 rounded-b-3xl flex items-center justify-center p-4 shadow-md z-20" style="background-color: #0f172a;">
+        <span class="text-white font-bold text-xl">BRAND</span>
+      </div>
+      <div class="w-full flex justify-center mb-2 -mt-16 relative z-10">
+        <img src="https://images.unsplash.com/photo-1585771724684-38269d6639fd?auto=format&fit=crop&q=80&w=800" alt="Product" class="max-w-full h-[500px] object-contain" />
+      </div>
+      <div class="flex items-center mb-6">
+        <div class="relative z-10 px-4 py-1.5 rounded-full text-lg font-bold whitespace-nowrap" style="background-color: #0f172a; color: white;">
+          智慧家電
+        </div>
+        <div class="flex-1 h-px -ml-2 relative z-0" style="background-color: #0f172a;"></div>
+      </div>
+      <div class="mb-6">
+        <div class="font-black mb-4" style="color: #0f172a; font-size: 2.8rem; line-height: 1.2;">
+          TechBrand
+        </div>
+        <h1 class="font-bold mb-6 leading-tight" style="color: #0f172a; font-size: 3.5rem; line-height: 1.2;">
+          高階智能空氣清淨機
+        </h1>
+        <div class="h-2 w-full mb-6" style="background: linear-gradient(to right, #0f172a, transparent);"></div>
+        <div class="flex flex-col gap-1">
+          <h2 class="text-3xl font-bold text-gray-600">操作與維護說明書</h2>
+          <p class="text-xl text-gray-600 font-en">Smart Air Purifier Pro - User & Maintenance Manual</p>
+        </div>
+      </div>
+      <div class="absolute bottom-20 left-20 right-20 flex justify-between items-end">
+        <div class="flex flex-col">
+          <div class="flex items-stretch text-xl">
+            <span class="text-gray-500 w-20 py-1">原廠型號</span>
+            <div class="w-[1.5px] bg-gray-300 mx-3"></div>
+            <span class="font-bold py-1" style="color: #0f172a;">AP-9000-X</span>
+          </div>
+          <div class="flex items-stretch text-xl">
+            <span class="text-gray-500 w-20 py-1">官網型號</span>
+            <div class="w-[1.5px] bg-gray-300 mx-3"></div>
+            <span class="font-bold py-1" style="color: #0f172a;">AirPro X</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. 思源宋體 -->
+  <div>
+    <h2 class="text-2xl font-bold mb-4 text-gray-800">2. 高級精緻風：思源宋體 (Noto Serif TC)</h2>
+    <div class="cover-container font-serif-tc">
+      <div class="absolute top-0 right-12 w-32 h-24 rounded-b-3xl flex items-center justify-center p-4 shadow-md z-20" style="background-color: #0f172a;">
+        <span class="text-white font-bold text-xl font-sans-tc">BRAND</span>
+      </div>
+      <div class="w-full flex justify-center mb-2 -mt-16 relative z-10">
+        <img src="https://images.unsplash.com/photo-1585771724684-38269d6639fd?auto=format&fit=crop&q=80&w=800" alt="Product" class="max-w-full h-[500px] object-contain" />
+      </div>
+      <div class="flex items-center mb-6">
+        <div class="relative z-10 px-4 py-1.5 rounded-full text-lg font-bold whitespace-nowrap" style="background-color: #0f172a; color: white;">
+          智慧家電
+        </div>
+        <div class="flex-1 h-px -ml-2 relative z-0" style="background-color: #0f172a;"></div>
+      </div>
+      <div class="mb-6">
+        <div class="font-black mb-4" style="color: #0f172a; font-size: 2.8rem; line-height: 1.2;">
+          TechBrand
+        </div>
+        <h1 class="font-bold mb-6 leading-tight" style="color: #0f172a; font-size: 3.5rem; line-height: 1.2;">
+          高階智能空氣清淨機
+        </h1>
+        <div class="h-2 w-full mb-6" style="background: linear-gradient(to right, #0f172a, transparent);"></div>
+        <div class="flex flex-col gap-1">
+          <h2 class="text-3xl font-bold text-gray-600">操作與維護說明書</h2>
+          <p class="text-xl text-gray-600 font-en">Smart Air Purifier Pro - User & Maintenance Manual</p>
+        </div>
+      </div>
+      <div class="absolute bottom-20 left-20 right-20 flex justify-between items-end">
+        <div class="flex flex-col">
+          <div class="flex items-stretch text-xl">
+            <span class="text-gray-500 w-20 py-1 font-sans-tc">原廠型號</span>
+            <div class="w-[1.5px] bg-gray-300 mx-3"></div>
+            <span class="font-bold py-1 font-sans-tc" style="color: #0f172a;">AP-9000-X</span>
+          </div>
+          <div class="flex items-stretch text-xl">
+            <span class="text-gray-500 w-20 py-1 font-sans-tc">官網型號</span>
+            <div class="w-[1.5px] bg-gray-300 mx-3"></div>
+            <span class="font-bold py-1 font-sans-tc" style="color: #0f172a;">AirPro X</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. 圓體 -->
+  <div>
+    <h2 class="text-2xl font-bold mb-4 text-gray-800">3. 親切柔和風：圓體 (Zen Maru Gothic)</h2>
+    <div class="cover-container font-maru">
+      <div class="absolute top-0 right-12 w-32 h-24 rounded-b-3xl flex items-center justify-center p-4 shadow-md z-20" style="background-color: #0f172a;">
+        <span class="text-white font-bold text-xl font-sans-tc">BRAND</span>
+      </div>
+      <div class="w-full flex justify-center mb-2 -mt-16 relative z-10">
+        <img src="https://images.unsplash.com/photo-1585771724684-38269d6639fd?auto=format&fit=crop&q=80&w=800" alt="Product" class="max-w-full h-[500px] object-contain" />
+      </div>
+      <div class="flex items-center mb-6">
+        <div class="relative z-10 px-4 py-1.5 rounded-full text-lg font-bold whitespace-nowrap" style="background-color: #0f172a; color: white;">
+          智慧家電
+        </div>
+        <div class="flex-1 h-px -ml-2 relative z-0" style="background-color: #0f172a;"></div>
+      </div>
+      <div class="mb-6">
+        <div class="font-black mb-4" style="color: #0f172a; font-size: 2.8rem; line-height: 1.2;">
+          TechBrand
+        </div>
+        <h1 class="font-bold mb-6 leading-tight" style="color: #0f172a; font-size: 3.5rem; line-height: 1.2;">
+          高階智能空氣清淨機
+        </h1>
+        <div class="h-2 w-full mb-6" style="background: linear-gradient(to right, #0f172a, transparent);"></div>
+        <div class="flex flex-col gap-1">
+          <h2 class="text-3xl font-bold text-gray-600">操作與維護說明書</h2>
+          <p class="text-xl text-gray-600 font-en">Smart Air Purifier Pro - User & Maintenance Manual</p>
+        </div>
+      </div>
+      <div class="absolute bottom-20 left-20 right-20 flex justify-between items-end">
+        <div class="flex flex-col">
+          <div class="flex items-stretch text-xl">
+            <span class="text-gray-500 w-20 py-1 font-sans-tc">原廠型號</span>
+            <div class="w-[1.5px] bg-gray-300 mx-3"></div>
+            <span class="font-bold py-1 font-sans-tc" style="color: #0f172a;">AP-9000-X</span>
+          </div>
+          <div class="flex items-stretch text-xl">
+            <span class="text-gray-500 w-20 py-1 font-sans-tc">官網型號</span>
+            <div class="w-[1.5px] bg-gray-300 mx-3"></div>
+            <span class="font-bold py-1 font-sans-tc" style="color: #0f172a;">AirPro X</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
