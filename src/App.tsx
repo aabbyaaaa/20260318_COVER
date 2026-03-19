@@ -538,12 +538,12 @@ export default function App() {
         </div>
 
         {/* Bottom Right Brand Logo */}
-        <div className="absolute bottom-16 right-16">
+        <div className="absolute bottom-12 right-12 z-[100] flex justify-end items-end">
           {formData.brandLogoUrl ? (
             <img
               src={formData.brandLogoUrl}
               alt="Brand Logo"
-              className="h-12 object-contain"
+              className="h-24 max-w-[250px] object-contain"
               referrerPolicy="no-referrer"
             />
           ) : null}
@@ -569,40 +569,72 @@ export default function App() {
           <path d="M0,0 L100,0 L100,100 C50,100 0,50 0,0 Z" fill="none" stroke="white" strokeWidth="0.5" />
           <path d="M0,20 C40,20 80,60 80,100 L0,100 Z" fill="none" stroke="white" strokeWidth="0.5" />
         </svg>
-      </div>
 
-      {/* Top Right Content */}
-      <div className="relative z-10 text-right p-16 text-white">
-        <h1 className="text-6xl font-black mb-4 tracking-wider">{formData.productNameEn || 'PRODUCT'}</h1>
-        <h2 className="text-4xl font-bold text-white/90">{formData.productNameZh}</h2>
-      </div>
-
-      {/* Bottom Content */}
-      <div className="absolute bottom-0 left-0 w-full h-[35%] bg-white p-16 flex justify-between items-end">
-        <div className="flex flex-col gap-4 w-1/2 z-20">
-          <div className="text-2xl font-bold" style={{ color: formData.themeColor }}>
-            {formData.category}
-          </div>
-          <div className="text-gray-600 text-lg">
-            {selectedDocType.en} - {selectedDocType.zh}
-          </div>
-          <div className="mt-4">
-            <div className="text-3xl font-bold text-gray-800">{formData.originalModel}</div>
-            <div className="text-xl text-gray-500">{formData.websiteModel}</div>
-          </div>
-          {formData.companyLogoUrl && (
-            <img src={formData.companyLogoUrl} alt="Logo" className="h-12 object-contain mt-8" referrerPolicy="no-referrer" />
-          )}
+        {/* Document Type (Bottom Left of Color Block) */}
+        <div className="absolute bottom-8 left-16 text-white z-20">
+          <div className="text-3xl font-bold opacity-90 tracking-widest mb-2">{selectedDocType.zh}</div>
+          <div className="text-lg opacity-75 tracking-wider uppercase">{selectedDocType.en}</div>
         </div>
       </div>
 
+      {/* Company Logo (Top Right) */}
+      <div className="absolute top-16 right-16 z-20">
+        {formData.companyLogoUrl && (
+          <img 
+            src={formData.companyLogoUrl} 
+            alt="Company Logo" 
+            className="h-16 object-contain" 
+            style={{ filter: 'brightness(0) invert(1)' }} 
+            referrerPolicy="no-referrer" 
+          />
+        )}
+      </div>
+
+      {/* Product Names (Upper Middle) */}
+      <div className="absolute top-[15%] left-0 w-full px-16 z-20 text-white text-left">
+        <div className="mb-4 drop-shadow-md">
+          <div className="text-4xl font-bold mb-2 opacity-90 tracking-wider font-['Noto_Serif_TC',serif]">
+            {formData.brandName}
+          </div>
+          <h1 className="text-6xl font-black tracking-wider leading-tight font-['Noto_Serif_TC',serif]">
+            {formData.productNameZh}
+          </h1>
+        </div>
+        <h2 className="text-3xl font-bold text-white/90 drop-shadow-sm">
+          {formData.productNameEn || 'PRODUCT'}
+        </h2>
+      </div>
+
+      {/* Info Content (Below Color Block) */}
+      <div className="absolute top-[68%] left-16 flex flex-col gap-4 w-1/2 z-20">
+        <div className="text-2xl font-bold" style={{ color: formData.themeColor }}>
+          {formData.category}
+        </div>
+        <div className="mt-2">
+          <div className="text-3xl font-bold text-gray-800">{formData.originalModel}</div>
+          <div className="text-xl text-gray-500">{formData.websiteModel}</div>
+        </div>
+      </div>
+
+      {/* Product Logo (Bottom Right) */}
+      <div className="absolute bottom-12 right-12 z-[100] flex justify-end items-end">
+        {formData.brandLogoUrl && (
+          <img 
+            src={formData.brandLogoUrl} 
+            alt="Product Logo" 
+            className="h-24 max-w-[250px] object-contain" 
+            referrerPolicy="no-referrer" 
+          />
+        )}
+      </div>
+
       {/* Product Image */}
-      <div className="absolute bottom-16 right-8 w-[55%] h-[60%] flex items-end justify-end z-10">
+      <div className="absolute bottom-32 right-8 w-[55%] h-[60%] flex items-end justify-end z-10">
         {displayImageUrl && (
           <img 
             src={displayImageUrl} 
             alt="Product" 
-            className="max-w-full max-h-full object-contain" 
+            className="max-w-full max-h-full object-contain drop-shadow-2xl" 
             referrerPolicy="no-referrer" 
           />
         )}
@@ -616,45 +648,78 @@ export default function App() {
       className="bg-white shadow-2xl relative flex flex-col overflow-hidden shrink-0"
       style={{ width: '210mm', height: '297mm' }}
     >
-      {/* Top Background */}
-      <div 
-        className="absolute top-0 left-0 w-full h-[55%]"
-        style={{ backgroundColor: formData.themeColor }}
-      ></div>
-
-      {/* Top Content */}
-      <div className="relative z-10 p-16 text-white w-2/3">
-        <div className="text-lg mb-8 opacity-80 border-b border-white/30 pb-4">
-          {formData.brandName} | {selectedDocType.en}
-        </div>
-        <h1 className="text-7xl font-black leading-tight tracking-tight uppercase">
-          {formData.productNameEn || 'PRODUCT'}
-        </h1>
-        <h2 className="text-3xl mt-6 font-medium opacity-90">
-          {formData.productNameZh}
-        </h2>
-      </div>
-
-      {/* Bottom Content */}
-      <div className="absolute bottom-16 left-16 z-20 flex flex-col gap-2">
-        <div className="text-gray-400 text-sm tracking-widest uppercase">Model</div>
-        <div className="text-2xl font-bold text-gray-800">{formData.originalModel}</div>
-        <div className="text-lg text-gray-500">{formData.websiteModel}</div>
+      {/* Top Right Content */}
+      <div className="absolute top-16 right-16 flex flex-col items-end text-right z-20">
         {formData.companyLogoUrl && (
-          <img src={formData.companyLogoUrl} alt="Logo" className="h-10 object-contain mt-4" referrerPolicy="no-referrer" />
+          <img 
+            src={formData.companyLogoUrl} 
+            alt="Company Logo" 
+            className="h-16 object-contain mb-8" 
+            referrerPolicy="no-referrer" 
+          />
         )}
+        <div 
+          className="text-6xl font-black mb-2 tracking-wider" 
+          style={{ color: formData.themeColor }}
+        >
+          {formData.brandName}
+        </div>
+        <div className="text-5xl font-black text-gray-800 mb-4 tracking-wider">
+          {formData.originalModel}
+        </div>
+        <div className="text-5xl font-black text-gray-800 mb-6 tracking-widest font-['Noto_Serif_TC',serif]">
+          {formData.productNameZh}
+        </div>
+        
+        {formData.category && (
+          <div 
+            className="px-4 py-1 rounded text-white font-bold text-xl mb-8 tracking-wider" 
+            style={{ backgroundColor: formData.themeColor }}
+          >
+            {formData.category}
+          </div>
+        )}
+
+        <div className="text-3xl font-bold text-gray-800 mb-2 tracking-widest font-['Noto_Serif_TC',serif]">
+          {selectedDocType.zh}
+        </div>
+        <div className="text-lg text-gray-600 tracking-wider">
+          {formData.productNameEn} - {selectedDocType.en}
+        </div>
       </div>
 
-      {/* Product Image */}
-      <div className="absolute bottom-12 right-12 w-[70%] h-[65%] flex items-end justify-end z-10">
+      {/* Product Image (Bottom Left/Center) */}
+      <div className="absolute bottom-16 left-12 w-[65%] h-[60%] flex items-end justify-start z-10">
         {displayImageUrl && (
           <img 
             src={displayImageUrl} 
             alt="Product" 
-            className="max-w-full max-h-full object-contain" 
+            className="max-w-full max-h-full object-contain object-bottom-left drop-shadow-2xl" 
             referrerPolicy="no-referrer" 
           />
         )}
+      </div>
+
+      {/* Bottom Right Content */}
+      <div className="absolute bottom-16 right-16 flex flex-col items-end z-20">
+        <div 
+          className="text-4xl font-black mb-4 pb-2 border-b-4 inline-block tracking-wider" 
+          style={{ color: formData.themeColor, borderColor: formData.themeColor }}
+        >
+          {formData.brandName}
+        </div>
+        <div className="flex flex-col gap-2 mt-2">
+          <div className="flex items-center justify-end text-lg">
+            <span className="text-gray-500 w-24 text-right font-medium tracking-wider">原廠型號</span>
+            <span className="w-[2px] h-4 bg-gray-300 mx-4"></span>
+            <span className="text-gray-800 font-bold w-48">{formData.originalModel}</span>
+          </div>
+          <div className="flex items-center justify-end text-lg">
+            <span className="text-gray-500 w-24 text-right font-medium tracking-wider">官網型號</span>
+            <span className="w-[2px] h-4 bg-gray-300 mx-4"></span>
+            <span className="text-gray-800 font-bold w-48">{formData.websiteModel}</span>
+          </div>
+        </div>
       </div>
     </div>
   );
